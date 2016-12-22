@@ -156,11 +156,47 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      // var counter to keep track of conflicts
+      var counter = 0;
+      // create variable 'row' = 0
+      var row = 0;
+      // create variable 'col' = mD
+      var col = majorDiagonalColumnIndexAtFirstRow;
+      // access to the board
+      var board = this.rows();
+      // while the row is < board.length, 
+      while (row < board.length) {
+        //check the square for queens
+          //if there's a queen, increase counter++
+        if (board[row][col] === 1) {
+          counter++;
+        }
+        //increment the row and column
+        col++;
+        row++;
+      }
+      //if counter > 1
+      if (counter > 1) {
+        //return true
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      var board = this.rows();
+      // get major Diagonal name 
+      // since there could be negative names, use the math operation below to find starting point:
+      var majDiagName = -Math.abs(board.length - 2);
+      //create a while loop 
+      while (majDiagName < board.length) {
+        var isConflict = this.hasMajorDiagonalConflictAt(majDiagName);
+        if (isConflict) {
+          return true;
+        }
+        majDiagName++;
+      }
       return false; // fixme
     },
 
@@ -171,11 +207,50 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+      // var col = minorDiag
+      var col = minorDiagonalColumnIndexAtFirstRow;
+      // create variable row at 0
+      var row = 0;
+      // create a counter
+      var counter = 0;
+      // get board
+      var board = this.rows();
+      // while row < board.length
+      while (row < board.length) {
+      // check if the cell has a value of 1
+        if (board[row][col] === 1) {
+          // if it does, increment counter
+          counter++;
+        } 
+        // increment row by one 
+        row++;
+        // decrease col by one
+        col--;
+      }
+      // if counter > 1 
+      if (counter > 1) {
+        // return true
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      //create variable to get board
+      var board = this.rows();
+      // get starting point for the minor diagonal conflicts on the board 
+      var minDiagName = board.length + 1;
+      // while minDiagName is greater than zero
+      while (minDiagName > 0) {
+        // call the minorDiagAt fnc
+        var isConflict = this.hasMinorDiagonalConflictAt(minDiagName);
+        if (isConflict) {
+          return true;
+        }
+        minDiagName--;
+      }
+
       return false; // fixme
     }
 
@@ -183,6 +258,13 @@
 
 
   });
+
+
+
+
+
+
+
 
   var makeEmptyMatrix = function(n) {
     return _(_.range(n)).map(function() {
