@@ -79,27 +79,74 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var row = this.rows()[rowIndex];
+      var conflictCount = _.reduce(row, function(memo, num) {
+        return memo + num;
+      }, 0);
+
+      if (conflictCount < 2) {
+        return false;
+      } else {
+        return true;
+      } 
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      // create a isConflict variable
+      // grab the chess board by invoking this.rows();
+      var board = this.rows();
+      // iterate over the entire board
+      for (var i = 0; i < board.length; i++) {
+        // at each iteration, invoke hasRowConflictAt[i] and store it's value (boolean)
+        var isConflict = this.hasRowConflictAt(i); // isConflict will return a boolean value
+        // if isConflict is equal to true, exit out of the forloop
+        if (isConflict) {
+          return true;
+        }
+      }
+      return isConflict; // fixme
     },
-
-
 
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
-    hasColConflictAt: function(colIndex) {
+    hasColConflictAt: function(colIndex) { // takes in a number
+     // create a conflictCounter
+      var conflictCounter = 0;
+      // grab the board
+      var board = this.rows();
+      // iterate through the board's rows
+      // OR set reduce to conflictCounter
+      for (var i = 0; i < board.length; i++) {
+        // check each row at colIndex
+        // if it is equal to 1, add to counter 
+        if (board[i][colIndex] === 1) {
+          conflictCounter++;
+        }
+      }
+      // check if conflictCounter is greater than 1
+      if (conflictCounter > 1) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // get board
+      var board = this.rows();
+      // iterate over board
+      for (var i = 0; i < board.length; i++) {
+        // set results equal to hasColConflictAt(i)
+        var results = this.hasColConflictAt(i);
+        // if the results is true, exit out of the for loop
+        if (results) {
+          return true;
+        }     
+      }
+      return false;
     },
 
 
