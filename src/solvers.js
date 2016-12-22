@@ -16,7 +16,29 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
+  // create new board
+  var boardObj = new Board({n: n});
+  // get new board 
+  var board = boardObj.rows();
+  //first for loop iterates over rows (i)
+  for (var i = 0; i < board.length; i++) {
+    //second for loop iterates over columns (j)
+    for (var j = 0; j < board.length; j++) {
+      //place rook at board[i][j]
+      board[i][j] = 1;
+      //invoke hasAnyRowConflicts[i]
+      //invoke hasAnyColConflicts[j]
+      // if one of them returns true, 
+      if (boardObj.hasAnyRowConflicts(i) || boardObj.hasAnyColConflicts(j)) {
+        // remove rook (set board[i][j] back to 0)
+        board[i][j] = 0;
+      }
+    }
+  }
+
+
+
+  var solution = board; //fixme
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
