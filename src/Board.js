@@ -240,7 +240,7 @@
       //create variable to get board
       var board = this.rows();
       // get starting point for the minor diagonal conflicts on the board 
-      var minDiagName = board.length + 1;
+      var minDiagName = (board.length * 2) - 3;
       // while minDiagName is greater than zero
       while (minDiagName > 0) {
         // call the minorDiagAt fnc
