@@ -88,7 +88,7 @@ window.countNRooksSolutions = function(n) {
       board.togglePiece(row, i);
     }
   };
-  //addByRow(board, 0);
+  addByRow(board, 0);
 
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
@@ -164,7 +164,7 @@ window.countNQueensSolutions = function(n) {
       board.togglePiece(row, i);
     }
   };
-  //addByRow(0);
+  addByRow(0);
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
 
